@@ -1,12 +1,15 @@
+use std::env;
 pub use std::path::Path;
 
 use ml_rust::{linear_regression, read_data};
 // mod feature_scaling;
 
 fn main() {
-    let path = Path::new("./data_files/ex1data1.txt");
+    let args: Vec<String> = env::args().collect();
 
-    let (x_ptr, y_ptr) = match read_data::get_data(path) {
+    let file_path = Path::new(&args[1]);
+
+    let (x_ptr, y_ptr) = match read_data::get_data(file_path) {
         Ok((x_ptr, y_ptr)) => (x_ptr, y_ptr),
         Err(e) => panic!("{}", e.get_ref().unwrap()),
     };
