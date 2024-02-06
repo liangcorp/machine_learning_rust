@@ -4,7 +4,7 @@ use ml_rust::{linear_regression, read_data};
 // mod feature_scaling;
 
 fn main() {
-    let path = Path::new("../data_files/ex1data1.txt");
+    let path = Path::new("./data_files/ex1data1.txt");
 
     let (x_ptr, y_ptr) = match read_data::get_data(path) {
         Ok((x_ptr, y_ptr)) => (x_ptr, y_ptr),
