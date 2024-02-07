@@ -10,6 +10,16 @@ use ml_rust::{
 fn main() {
     let args: Vec<String> = env::args().collect();
 
+    if args.len() < 2 {
+        eprintln!("Error: no input argument");
+        std::process::exit(exitcode::DATAERR);
+    }
+
+    if args[1].is_empty() {
+        eprintln!("Error: filename is empty");
+        std::process::exit(exitcode::DATAERR);
+    }
+
     let file_path = Path::new(&args[1]);
     //
     // let (x_ptr, y_ptr) = match read_data::get_data(file_path) {
