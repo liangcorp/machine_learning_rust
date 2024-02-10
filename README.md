@@ -2,4 +2,5 @@
 
 Linear regression has been completed.
 Gradient descent works with ex1data1 as it is.
-It won't work well with feature scaling after scaling the features with mean normalization.
+
+Moving feature scaling to its own [repo](https://github.com/liangcorp/feature_scaling)
