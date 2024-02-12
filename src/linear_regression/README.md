@@ -106,6 +106,8 @@ $$
 θ = (X^TX)^{-1}X^Ty
 $$
 
+![dykma6dwEea3qApInhZCFg_333df5f11086fee19c4fb81bc34d5125_Screenshot-2016-11-10-10 06 16](https://github.com/liangcorp/machine_learning_rust/assets/2737157/babdc838-56d3-4e6d-b3f3-a3bef1d8dd9e)
+
 There is no need to do feature scaling with the normal equation.
 
 The following is a comparison of gradient descent and the normal equation:
