@@ -1,6 +1,10 @@
 # Machine Learning formulas implemented in Rust
 
-Linear regression has been completed.
-Gradient descent works with ex1data1 as it is.
+## Feature Scaling
 
 Moving feature scaling to its own [repo](https://github.com/liangcorp/feature_scaling)
+
+## Linear Regression
+
+Linear regression has been completed.
+Detail explanation can be found [here](https://github.com/liangcorp/machine_learning_rust/tree/main/src/linear_regression)
