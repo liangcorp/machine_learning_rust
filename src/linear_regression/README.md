@@ -18,7 +18,7 @@ h_θ(x) = θ_0x^{(0)} + θ_1x^{(1)} + ... + θ_nx^{(n)}
 $$
 
 $$
-where x^{(0)} = 1.0
+where   x^{(0)} = 1.0
 $$
 
 To describe the supervised learning problem slightly more formally, our goal
