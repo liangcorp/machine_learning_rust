@@ -23,7 +23,7 @@ therefore like this:
 
 When the target variable that we're trying to predict is continuous, such as
 in our housing example, we call the learning problem a regression problem.
-When $y$ can take on only a small number of discrete values (such as if,
+When $y$ can take on only some discrete values (such as if,
 given the living area, we wanted to predict if a dwelling is a house or an
 apartment, say), we call it a classification problem.
 
@@ -113,7 +113,7 @@ too large) to the global minimum. Indeed, $J$ is a convex quadratic function.
 Here is an example of gradient descent as it is run to minimize a quadratic
 function.
 
-![gradient_descent](https://github.com/liangcorp/machine_learning_c/assets/2737157/3b5f0e81-3de5-40e1-8fbf-4e064379a7b4)
+![Gradient_descent](https://github.com/liangcorp/machine_learning_c/assets/2737157/3b5f0e81-3de5-40e1-8fbf-4e064379a7b4)
 
 The ellipses shown above are the contours of a quadratic function. Also shown
 is the trajectory taken by gradient descent, which was initialized at (48,30).
