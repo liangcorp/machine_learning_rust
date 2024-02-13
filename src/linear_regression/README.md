@@ -19,6 +19,8 @@ is, given a training set, to learn a function $h : X → Y$ so that $h(x)$ is a
 this function $h$ is called a hypothesis. Seen pictorially, the process is
 therefore like this:
 
+![H6qTdZmYEeaagxL7xdFKxA_2f0f671110e8f7446bb2b5b2f75a8874_Screenshot-2016-10-23-20 14 58](https://github.com/liangcorp/machine_learning_rust/assets/2737157/dd86f847-2c3b-4efd-ae57-284c1d266376)
+
 When the target variable that we're trying to predict is continuous, such as
 in our housing example, we call the learning problem a regression problem.
 When $y$ can take on only a small number of discrete values (such as if,
