@@ -46,3 +46,88 @@ $$
 $$
 P(y=0|x;θ)+P(y=1|x;θ)=1
 $$
+
+## Decision Boundary
+
+In order to get our discrete 0 or 1 classification, we can translate the output
+of the hypothesis function as follows:
+
+$$
+h_θ(x)≥0.5→y=1
+$$
+
+$$
+h_θ(x)<0.5→y=0
+$$
+
+The way our logistic function g behaves is that when its input is greater than
+or equal to zero, its output is greater than or equal to 0.5:
+
+$$
+g(z)≥0.5
+$$
+
+$$
+\text{when }z≥0
+$$
+
+Remember.
+
+$$
+z=0,e^0=1⇒g(z)=1/2
+$$
+
+$$
+z→∞,e^{−∞}→0⇒g(z)=1
+$$
+
+$$
+z→−∞,e^∞→∞⇒g(z)=0
+$$
+
+So if our input to g is $θ^TX$, then that means:
+
+$$
+hθ(x)=g(θ^Tx)≥0.5
+$$
+
+$$
+\text{when } θ^Tx≥0
+$$
+
+From these statements we can now say:
+
+$$
+θ^Tx≥0⇒y=1
+$$
+
+$$
+θ^Tx<0⇒y=0
+$$
+
+The **decision boundary** is the line that separates the area where y = 0 and
+where y = 1. It is created by our hypothesis function.
+
+### Example
+
+$$
+5
+
+θ=−10
+
+y=1\text{if}5+(−1)x_1 + 0x_2≥0
+
+5−x_1≥0
+
+−x_1≥−5
+
+x_1≤5
+$$
+
+In this case, our decision boundary is a straight vertical line placed on the
+graph where $x_1=5$, and everything to the left of that denotes y = 1, while
+everything to the right denotes y = 0.
+
+Again, the input to the sigmoid function g(z) (e.g. $θ^TX$) doesn't need to
+be linear, and could be a function that describes a
+circle (e.g. $z=θ_0+θ_1x_1^2+θ_2x^2_2$) or any shape to fit our data.
