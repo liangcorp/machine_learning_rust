@@ -14,7 +14,7 @@ denote the space of input values, and $Y$ to denote the space of output
 values. In this example, $X = Y = ℝ$.
 
 To describe the supervised learning problem slightly more formally, our goal
-is, given a training set, to learn a function $h : X → Y$ so that $h^{(x)}$ is a
+is, given a training set, to learn a function $h : X → Y$ so that $h(x)$ is a
 "good" predictor for the corresponding value of $y$. For historical reasons,
 this function $h$ is called a hypothesis. Seen pictorially, the process is
 therefore like this:
