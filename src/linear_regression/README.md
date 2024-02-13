@@ -13,6 +13,10 @@ set, and has nothing to do with exponentiation. We will also use $X$ to
 denote the space of input values, and $Y$ to denote the space of output
 values. In this example, $X = Y = ℝ$.
 
+$$
+h_θ(x) = θ_0x^{(0)} + θ_1x^{(1)} + ... + θ_ix^({i})
+$$
+
 To describe the supervised learning problem slightly more formally, our goal
 is, given a training set, to learn a function $h : X → Y$ so that $h(x)$ is a
 "good" predictor for the corresponding value of $y$. For historical reasons,
