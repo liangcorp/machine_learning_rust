@@ -27,6 +27,8 @@ $$
 
 The following image shows us what the sigmoid function looks like:
 
+![1WFqZHntEead-BJkoDOYOw_2413fbec8ff9fa1f19aaf78265b8a33b_Logistic_function](https://github.com/liangcorp/machine_learning_rust/assets/2737157/d9d35e7b-1cc1-42c1-9cea-9b58975bd892)
+
 The function $g(z)$, shown here, maps any real number to the (0, 1) interval,
 making it useful for transforming an arbitrary-valued function into a function
 better suited for classification.
