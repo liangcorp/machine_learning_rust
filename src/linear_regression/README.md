@@ -14,7 +14,7 @@ denote the space of input values, and $Y$ to denote the space of output
 values. In this example, $X = Y = ℝ$.
 
 $$
-h_θ(x) = θ_0x^{(0)} + θ_1x^{(1)} + ... + θ_nx^{(n)}
+h_θ(x) = θ_0x^{(0)} + θ_1x^{(1)} + ... + θ_ix^{(i)}
 $$
 
 $$
