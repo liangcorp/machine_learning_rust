@@ -112,15 +112,29 @@ where y = 1. It is created by our hypothesis function.
 
 $$
 5
+$$
 
-θ=−10
+$$
+θ=−1
+$$
 
-y=1\text{if}5+(−1)x_1 + 0x_2≥0
+$$
+0
+$$
 
+$$
+y=1 \text{ if } 5+(−1)x_1 + 0x_2≥0
+$$
+
+$$
 5−x_1≥0
+$$
 
+$$
 −x_1≥−5
+$$
 
+$$
 x_1≤5
 $$
 
