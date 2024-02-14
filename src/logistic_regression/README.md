@@ -188,7 +188,7 @@ We can work out the derivative part using calculus to get:
 
 `Repeat {`
 
-$θ_j:=θ_j−{α \over m}\sum_{i=1}^{m}(h_θ(x^{(i)})−y^{(i)})x_j^{(i)}$
+$θ_j:=θ_j−{α \over m}{\sum_{i=1}^{m}}(h_θ(x^{(i)})−y^{(i)})x_j^{(i)}$
 
 `}`
 
