@@ -145,3 +145,118 @@ everything to the right denotes y = 0.
 Again, the input to the sigmoid function g(z) (e.g. $θ^TX$) doesn't need to
 be linear, and could be a function that describes a
 circle (e.g. $z=θ_0+θ_1x_1^2+θ_2x^2_2$) or any shape to fit our data.
+
+## Cost Function
+
+We cannot use the same cost function that we use for linear regression because
+the Logistic Function will cause the output to be wavy, causing many local
+optima. In other words, it will not be a convex function.
+
+Instead, our cost function for logistic regression looks like:
+
+$$
+J(θ)={1 \over{m}}\sum_{i=1}^{m}{Cost(h_θ(x^{(i)}), y^{(i)})}
+$$
+
+$$
+Cost(h_θ(x),y) = −\log(h_θ(x)) \text{    if } y = 1
+$$
+
+$$
+Cost(h_θ(x),y)=−\log(1−h_θ(x)) \text{    if } y = 0
+$$
+
+When y = 1, we get the following plot for $J(θ)$ vs $h_θ(x)$:
+
+Similarly, when y = 0, we get the following plot for $J(θ)$ vs $h_θ(x)$:
+
+$$
+Cost(h_θ(x), y) = 0 \text{ if } h_θ(x)=y
+$$
+
+$$
+Cost(h_θ(x), y) → ∞ \text{ if } y=0 \text{ and } h_θ(x) → 1
+$$
+
+$$
+Cost(h_θ(x), y) → ∞ \text{ if } y=1 \text{ and } h_θ(x) → 0
+$$
+
+If our correct answer 'y' is 0, then the cost function will be 0 if our
+hypothesis function also outputs 0. If our hypothesis approaches 1, then the
+cost function will approach infinity.
+
+If our correct answer 'y' is 1, then the cost function will be 0 if our
+hypothesis function outputs 1. If our hypothesis approaches 0, then the cost
+function will approach infinity.
+
+Note that writing the cost function in this way guarantees that $J(θ)$ is convex
+for logistic regression.
+
+## Simplified Cost Function and Gradient Descent
+
+We can compress our cost function's two conditional cases into one case:
+
+$$
+Cost(h_θ(x),y) = −y \log(h_θ(x)) − (1 − y) \log(1 − h_θ(x))
+$$
+
+Notice that when y is equal to 1, then the second term $(1 − y) \log(1 − h_θ(x))$
+will be zero and will not affect the result. If y is equal to 0, then the first
+term $− y \log(h_θ(x))$ will be zero and will not affect the result.
+
+We can fully write out our entire cost function as follows:
+
+$$
+J(θ)={−1 \over m} \sum_{i=1}^{m} [y^{(i)}\log(h_θ(x^{(i)}))+(1 − y^{(i)})
+\log(1 − h_θ(x^{(i)}))]
+$$
+
+A vectorized implementation is:
+
+$$
+h=g(Xθ)
+$$
+
+$$
+J(θ)={1 \over m} * −y^T\log(h)−(1−y)^T\log(1−h)
+$$
+
+### Gradient Descent
+
+Remember that the general form of gradient descent is:
+
+$$
+\text{ Repeat \{}
+$$
+
+$$
+θ_j := θ_j−α{∂ \over ∂θ_j}J(θ)
+$$
+
+$$
+\text{\}}
+$$
+
+We can work out the derivative part using calculus to get:
+
+$$
+\text{ Repeat \{}
+$$
+
+$$
+θ_j:=θ_j−{α \over m}{\sum_{i=1}^{m}(hθ(x^{(i)})−y^{(i)})x_j^{(i)}}
+$$
+
+$$
+\text{\}}
+$$
+
+Notice that this algorithm is identical to the one we used in linear
+regression. We still have to simultaneously update all values in theta.
+
+A vectorized implementation is:
+
+$$
+θ:=θ−{α \over m} X^T(g(Xθ)−\overrightarrow{y})
+$$
