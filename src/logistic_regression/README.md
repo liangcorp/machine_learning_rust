@@ -108,17 +108,33 @@ optima. In other words, it will not be a convex function.
 
 Instead, our cost function for logistic regression looks like:
 
-$J(θ)={1 \over{m}}\sum_{i=1}^{m}{Cost(h_θ(x^{(i)}), y^{(i)})}$
-$Cost(h_θ(x),y) = −\log(h_θ(x)) \text{    if } y = 1$
-$Cost(h_θ(x),y)=−\log(1−h_θ(x)) \text{    if } y = 0$
+$$
+J(θ)={1 \over{m}}\sum_{i=1}^{m}{Cost(h_θ(x^{(i)}), y^{(i)})}$
+$$
+
+$$
+Cost(h_θ(x),y) = −\log(h_θ(x)) \text{    if } y = 1
+$$
+
+$$
+Cost(h_θ(x),y)=−\log(1−h_θ(x)) \text{    if } y = 0
+$$
 
 When y = 1, we get the following plot for $J(θ)$ vs $h_θ(x)$:
 
 Similarly, when y = 0, we get the following plot for $J(θ)$ vs $h_θ(x)$:
 
-$Cost(h_θ(x), y) = 0 \text{ if } h_θ(x)=y$
-$Cost(h_θ(x), y) → ∞ \text{ if } y=0 \text{ and } h_θ(x) → 1$
-$Cost(h_θ(x), y) → ∞ \text{ if } y=1 \text{ and } h_θ(x) → 0$
+$$
+Cost(h_θ(x), y) = 0 \text{ if } h_θ(x)=y
+$$
+
+$$
+Cost(h_θ(x), y) → ∞ \text{ if } y=0 \text{ and } h_θ(x) → 1
+$$
+
+$$
+Cost(h_θ(x), y) → ∞ \text{ if } y=1 \text{ and } h_θ(x) → 0
+$$
 
 If our correct answer 'y' is 0, then the cost function will be 0 if our
 hypothesis function also outputs 0. If our hypothesis approaches 1, then the
@@ -143,13 +159,20 @@ term $− y \log(h_θ(x))$ will be zero and will not affect the result.
 
 We can fully write out our entire cost function as follows:
 
-$J(θ)={−1 \over m} \sum_{i=1}^{m} [y^{(i)}\log(h_θ(x^{(i)}))+(1 − y^{(i)})
-\log(1 − h_θ(x^{(i)}))]$
+$$
+J(θ)={−1 \over m} \sum_{i=1}^{m} [y^{(i)}\log(h_θ(x^{(i)}))+(1 − y^{(i)})
+\log(1 − h_θ(x^{(i)}))]
+$$
 
 A vectorized implementation is:
 
-$h=g(Xθ)$
-$J(θ)={1 \over m} * −y^T\log(h)−(1−y)^T\log(1−h)$
+$$
+h=g(Xθ)
+$$
+
+$$
+J(θ)={1 \over m} * −y^T\log(h)−(1−y)^T\log(1−h)
+$$
 
 ### Gradient Descent
 
