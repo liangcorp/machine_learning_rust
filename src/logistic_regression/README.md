@@ -238,6 +238,8 @@ highest value as our prediction.
 
 The following image shows how one could classify 3 classes:
 
+![cqmPjanSEeawbAp5ByfpEg_299fcfbd527b6b5a7440825628339c54_Screenshot-2016-11-13-10 52 29](https://github.com/liangcorp/machine_learning_rust/assets/2737157/4261b127-e234-411d-aad8-aa6feeff42fb)
+
 ### To summarize
 
 Train a logistic regression classifier $h_θ(x)$ for each class $(i)$ to
