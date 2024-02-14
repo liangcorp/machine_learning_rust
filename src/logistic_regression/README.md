@@ -243,4 +243,4 @@ The following image shows how one could classify 3 classes:
 Train a logistic regression classifier h_θ(x) for each class (i) to
 predict the probability that $P(y = i|x;θ)$.
 
-To make a prediction on a new x, pick the class that maximizes h_θ(x)
+To make a prediction on a new x, pick the class that maximizes $h_θ(x)$
