@@ -226,31 +226,23 @@ $$
 
 Remember that the general form of gradient descent is:
 
-$$
-\text{ Repeat \{}
-$$
+`Repeat {`
 
 $$
 θ_j := θ_j−α{∂ \over ∂θ_j}J(θ)
 $$
 
-$$
-\text{\}}
-$$
+`}`
 
 We can work out the derivative part using calculus to get:
 
-$$
-\text{ Repeat \{}
-$$
+`Repeat {`
 
 $$
 θ_j:=θ_j−{α \over m}{\sum_{i=1}^{m}(hθ(x^{(i)})−y^{(i)})x_j^{(i)}}
 $$
 
-$$
-\text{\}}
-$$
+`}`
 
 Notice that this algorithm is identical to the one we used in linear
 regression. We still have to simultaneously update all values in theta.
