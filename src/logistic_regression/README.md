@@ -157,10 +157,8 @@ $$
 
 A vectorized implementation is:
 
-$$
-h=g(Xθ) \\
-J(θ)={1 \over m} * −y^T\log(h)−(1−y)^T\log(1−h)
-$$
+$h=g(Xθ) \\
+J(θ)={1 \over m} * −y^T\log(h)−(1−y)^T\log(1−h)$
 
 ### Gradient Descent
 
@@ -168,9 +166,7 @@ Remember that the general form of gradient descent is:
 
 `Repeat {`
 
-$$
-θ_j := θ_j−α{∂ \over ∂θ_j}J(θ)
-$$
+$θ_j := θ_j−α{∂ \over ∂θ_j}J(θ)$
 
 `}`
 
@@ -178,9 +174,7 @@ We can work out the derivative part using calculus to get:
 
 `Repeat {`
 
-$$
-θ_j:=θ_j−{α \over m}{\sum_{i=1}^{m}(hθ(x^{(i)})−y^{(i)})x_j^{(i)}}
-$$
+$θ_j:=θ_j−{α \over m}{\sum_{i=1}^{m}(hθ(x^{(i)})−y^{(i)})x_j^{(i)}}$
 
 `}`
 
@@ -189,6 +183,4 @@ regression. We still have to simultaneously update all values in theta.
 
 A vectorized implementation is:
 
-$$
-θ:=θ−{α \over m} X^T(g(Xθ)−\overrightarrow{y})
-$$
+$θ:=θ−{α \over m} X^T(g(Xθ)−\overrightarrow{y})$
