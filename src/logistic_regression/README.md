@@ -198,3 +198,33 @@ regression. We still have to simultaneously update all values in theta.
 A vectorized implementation is:
 
 $θ:=θ−{α \over m} X^T(g(Xθ)−\overrightarrow{y})$
+
+## Multi-class Classification: One-vs-all
+
+Now we will approach the classification of data when we have more than two
+categories. Instead of y = {0,1} we will expand our definition so
+that y = {0,1...n}.
+
+Since y = {0,1...n}, we divide our problem into n+1 (+1 because the index
+starts at 0) binary classification problems; in each one, we predict the
+probability that 'y' is a member of one of our classes.
+
+$ y ∈ {0,1...n} $
+$ h_θ^{(0)}(x)=P(y=0|x;θ) $
+$ ... $
+$h_θ^{(n)}(x)=P(y=n|x;θ)$
+$prediction = max_i(h_θ^{(i)}(x))$
+
+We are basically choosing one class and then lumping all the others into a
+single second class. We do this repeatedly, applying binary logistic
+regression to each case, and then use the hypothesis that returned the
+highest value as our prediction.
+
+The following image shows how one could classify 3 classes:
+
+### To summarize
+
+Train a logistic regression classifier h_θ(x) for each class (i) to
+predict the probability that $P(y = i|x;θ)$.
+
+To make a prediction on a new x, pick the class that maximizes h_θ(x)
