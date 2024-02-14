@@ -23,7 +23,7 @@ pub fn get_thetas(
     x: &[Vec<f64>],
     y: &[f64],
     alpha: f64,
-    theta: &mut Vec<f64>,
+    theta: &mut [f64],
     num_iters: u32,
 ) -> Result<Box<Vec<f64>>, io::Error> {
     let num_train = y.len();
@@ -40,7 +40,7 @@ pub fn get_thetas(
     for _ in 0..num_iters {
         h_x.clear();
 
-        tmp_theta = theta.clone();
+        tmp_theta = theta.to_owned();
 
         for i in x.iter().take(num_train) {
             sum = 0.0;

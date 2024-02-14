@@ -1,7 +1,9 @@
+use core::panic;
 use std::env;
 pub use std::path::Path;
 
 use ml_rust::linear_regression::cost_functions;
+use ml_rust::linear_regression::gradient_descent;
 use ml_rust::linear_regression::normal_equation;
 use ml_rust::read_data;
 
@@ -25,12 +27,13 @@ fn main() {
         Err(e) => panic!("{}", e.get_ref().unwrap()),
     };
 
+    // testing linear regression
     let x = *x_ptr;
     let y = *y_ptr;
 
-    // let alpha = 0.01; // the learning speed
-
-    let theta = vec![0.0, 0.0]; // set theta 0 and theta 1 to 0.0
+    let alpha = 0.01; // the learning speed
+    let num_iters = 2000; // Number of gradient descent iterations
+    let mut theta = vec![0.0, 0.0]; // set theta 0 and theta 1 to 0.0
 
     match cost_functions::get_cost(&x, &y, &theta) {
         Ok(theta) => {
@@ -46,7 +49,10 @@ fn main() {
         Err(e) => panic!("{}", e.get_ref().unwrap()),
     }
 
-    println!("Found thetas using Gradient Descent: {:?}", theta);
+    match gradient_descent::get_thetas(&x, &y, alpha, &mut theta, num_iters) {
+        Ok(theta) => println!("Found thetas using Gradient Descent: {:?}", theta),
+        Err(e) => panic!("{}", e.get_ref().unwrap()),
+    }
 
     match normal_equation::get_theta(&x, &y) {
         Ok(theta) => {
@@ -54,37 +60,4 @@ fn main() {
         }
         Err(e) => panic!("{}", e.get_ref().unwrap()),
     }
-
-    // let (x_ptr, y_ptr) = match read_data::get_data(file_path) {
-    //     Ok((x_ptr, y_ptr)) => (x_ptr, y_ptr),
-    //     Err(e) => panic!("{}", e.get_ref().unwrap()),
-    // };
-    //
-    // let x = *x_ptr;
-    // let y = *y_ptr;
-    //
-    // let alpha = 0.01; // the learning speed
-    // let num_iters = 400; // Number of gradient descent iterations
-    // let mut theta: Vec<f64> = vec![0.0; x[0].len()];
-    //
-    // let (ex_2_nor_y, y_mean, y_std_dev) = feature_scaling::mean_normal_single(&y);
-    //
-    // let (ex_2_nor_x, x_mean, x_std_dev) = feature_scaling::mean_normal_multiple(&x);
-    //
-    // println!("X Mean: {:?}", x_mean);
-    // println!("X Standard Deviation: {:?}", x_std_dev);
-    //
-    // println!("Y Mean: {}", y_mean);
-    // println!("Y Standard Deviation: {}", y_std_dev);
-    //
-    // println!(
-    //     "Thetas are {:?}, J (the cost) is {}",
-    //     theta,
-    //     cost_functions::get_cost(&ex_2_nor_x, &ex_2_nor_y, &theta).unwrap()
-    // );
-    //
-    // println!(
-    //     "Found thetas using Gradient Descent: {:?}",
-    //     gradient_descent::get_thetas(&ex_2_nor_x, &ex_2_nor_y, alpha, &mut theta, num_iters)
-    // );
 }
