@@ -211,11 +211,23 @@ Since y = {0,1...n}, we divide our problem into n+1 (+1 because the index
 starts at 0) binary classification problems; in each one, we predict the
 probability that 'y' is a member of one of our classes.
 
-$ y ∈ {0,1...n} $
-$ h_θ^{(0)}(x)=P(y=0|x;θ) $
+$$
+y ∈ {0,1...n}
+$$
+
+$$
+h_θ^{(0)}(x)=P(y=0|x;θ)
+$$
+
 $ ... $
-$h_θ^{(n)}(x)=P(y=n|x;θ)$
-$prediction = max_i(h_θ^{(i)}(x))$
+
+$$
+h_θ^{(n)}(x)=P(y=n|x;θ)
+$$
+
+$$
+prediction = max_i(h_θ^{(i)}(x))
+$$
 
 We are basically choosing one class and then lumping all the others into a
 single second class. We do this repeatedly, applying binary logistic
