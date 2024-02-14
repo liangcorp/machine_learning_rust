@@ -13,11 +13,11 @@ $θ^Tx$ into the Logistic Function.
 
 Our new form uses the "Sigmoid Function," also called the "Logistic Function":
 
-$
+$$
 h_θ(x)=g(θ^Tx) \\
 z=θ^Tx \\
 g(z)={1 \over {1+e^{−z}}} \\
-$
+$$
 
 The following image shows us what the sigmoid function looks like:
 
@@ -33,56 +33,57 @@ Our probability that our prediction is 0 is just the complement of our
 probability that it is 1 (e.g. if probability that it is 1 is 70%, then
 the probability that it is 0 is 30%).
 
-$
+$$
 h_θ(x)=P(y=1|x;θ)=1−P(y=0|x;θ) \\
 P(y=0|x;θ)+P(y=1|x;θ)=1 \\
-$
+$$
 
 ## Decision Boundary
 
 In order to get our discrete 0 or 1 classification, we can translate the output
 of the hypothesis function as follows:
 
-$
+$$
 h_θ(x)≥0.5→y=1 \\
 h_θ(x)<0.5→y=0 \\
-$
+$$
 
 The way our logistic function g behaves is that when its input is greater than
 or equal to zero, its output is greater than or equal to 0.5:
 
-$
+$$
 g(z)≥0.5 \\
 \text{when }z≥0 \\
-$
+$$
 
 Remember.
 
-$
+$$
 z=0,e^0=1⇒g(z)=1/2 \\
 z→∞,e^{−∞}→0⇒g(z)=1 \\
 z→−∞,e^∞→∞⇒g(z)=0 \\
-$
+$$
+
 So if our input to g is $θ^TX$, then that means:
 
-$
+$$
 hθ(x)=g(θ^Tx)≥0.5 \\
 \text{when } θ^Tx≥0 \\
-$
+$$
 
 From these statements we can now say:
 
-$
+$$
 θ^Tx≥0⇒y=1 \\
 θ^Tx<0⇒y=0 \\
-$
+$$
 
 The **decision boundary** is the line that separates the area where y = 0 and
 where y = 1. It is created by our hypothesis function.
 
 ### Example
 
-$
+$$
 5 \\
 θ=−1 \\
 0 \\
@@ -90,7 +91,7 @@ y=1 \text{ if } 5+(−1)x_1 + 0x_2≥0 \\
 5−x_1≥0 \\
 −x_1≥−5 \\
 x_1≤5 \\
-$
+$$
 
 In this case, our decision boundary is a straight vertical line placed on the
 graph where $x_1=5$, and everything to the left of that denotes y = 1, while
@@ -108,21 +109,21 @@ optima. In other words, it will not be a convex function.
 
 Instead, our cost function for logistic regression looks like:
 
-$
+$$
 J(θ)={1 \over{m}}\sum_{i=1}^{m}{Cost(h_θ(x^{(i)}), y^{(i)})} \\
 Cost(h_θ(x),y) = −\log(h_θ(x)) \text{    if } y = 1 \\
 Cost(h_θ(x),y)=−\log(1−h_θ(x)) \text{    if } y = 0 \\
-$
+$$
 
 When y = 1, we get the following plot for $J(θ)$ vs $h_θ(x)$:
 
 Similarly, when y = 0, we get the following plot for $J(θ)$ vs $h_θ(x)$:
 
-$
+$$
 Cost(h_θ(x), y) = 0 \text{ if } h_θ(x)=y \\
 Cost(h_θ(x), y) → ∞ \text{ if } y=0 \text{ and } h_θ(x) → 1 \\
 Cost(h_θ(x), y) → ∞ \text{ if } y=1 \text{ and } h_θ(x) → 0 \\
-$
+$$
 
 If our correct answer 'y' is 0, then the cost function will be 0 if our
 hypothesis function also outputs 0. If our hypothesis approaches 1, then the
@@ -139,9 +140,9 @@ for logistic regression.
 
 We can compress our cost function's two conditional cases into one case:
 
-$
+$$
 Cost(h_θ(x),y) = −y \log(h_θ(x)) − (1 − y) \log(1 − h_θ(x))
-$
+$$
 
 Notice that when y is equal to 1, then the second term $(1 − y) \log(1 − h_θ(x))$
 will be zero and will not affect the result. If y is equal to 0, then the first
@@ -149,17 +150,17 @@ term $− y \log(h_θ(x))$ will be zero and will not affect the result.
 
 We can fully write out our entire cost function as follows:
 
-$
+$$
 J(θ)={−1 \over m} \sum_{i=1}^{m} [y^{(i)}\log(h_θ(x^{(i)}))+(1 − y^{(i)})
 \log(1 − h_θ(x^{(i)}))]
-$
+$$
 
 A vectorized implementation is:
 
-$
+$$
 h=g(Xθ) \\
 J(θ)={1 \over m} * −y^T\log(h)−(1−y)^T\log(1−h)
-$
+$$
 
 ### Gradient Descent
 
@@ -167,9 +168,9 @@ Remember that the general form of gradient descent is:
 
 `Repeat {`
 
-$
+$$
 θ_j := θ_j−α{∂ \over ∂θ_j}J(θ)
-$
+$$
 
 `}`
 
@@ -177,9 +178,9 @@ We can work out the derivative part using calculus to get:
 
 `Repeat {`
 
-$
+$$
 θ_j:=θ_j−{α \over m}{\sum_{i=1}^{m}(hθ(x^{(i)})−y^{(i)})x_j^{(i)}}
-$
+$$
 
 `}`
 
@@ -188,6 +189,6 @@ regression. We still have to simultaneously update all values in theta.
 
 A vectorized implementation is:
 
-$
+$$
 θ:=θ−{α \over m} X^T(g(Xθ)−\overrightarrow{y})
-$
+$$
