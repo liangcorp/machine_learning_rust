@@ -25,10 +25,7 @@ fn argument_check(args: &[String]) -> Result<(), io::Error> {
 
 fn display_help(err: io::Error) {
     eprintln!("ERROR: {}\n", err);
-    let help_message = String::from(
-        "Usage:
-Sample run using input data file",
-    );
+    let help_message = String::from("Usage: Sample run using input data file");
     println!("{}", help_message);
     std::process::exit(exitcode::USAGE);
 }

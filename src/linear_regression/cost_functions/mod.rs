@@ -1,7 +1,6 @@
 //! Cost function with multiple features
 //!
-//! This crate is a collection of functions to perform
-//! calculation of J(theta)
+//! This crate perform calculation of J(theta)
 
 use std::io;
 use std::io::{Error, ErrorKind};
@@ -20,7 +19,7 @@ use std::io::{Error, ErrorKind};
 
 pub fn get_cost(x: &[Vec<f64>], y: &[f64], theta: &[f64]) -> Result<f64, io::Error> {
     let num_feat = theta.len();
-    let mut h_x: Vec<f64> = Vec::new();
+    let mut h_x: Vec<f64> = vec![];
 
     let mut j_theta: f64 = 0.0; /* The cost */
     let mut sum: f64;
