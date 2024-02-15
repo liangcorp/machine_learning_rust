@@ -24,15 +24,15 @@ pub fn get_cost(x_mtrx: &[Vec<f64>], y_vec: &[f64], theta: &[f64]) -> Result<f64
     let mut j_theta: f64 = 0.0; /* The cost */
     let mut sum: f64;
 
+    if theta.len() > 2 {
+        return Err(Error::new(ErrorKind::Other, "sample cost function only accept single feature...skiping...\n"));
+    }
+
     let num_train = if x_mtrx.len() == y_vec.len() {
         y_vec.len()
     } else {
         return Err(Error::new(ErrorKind::Other, "Mis-matching training sets"));
     };
-
-    if x_mtrx[0].len() > 2 {
-        return Err(Error::new(ErrorKind::Other, "cost function only support single feature...skipping...\n"));
-    }
 
     for i in x_mtrx.iter().enumerate().take(num_train) {
         if i.1.len() != num_feat {

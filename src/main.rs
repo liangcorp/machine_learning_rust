@@ -35,7 +35,7 @@ fn main() {
 
     // check the input arguments
     match argument_check(&args) {
-        Ok(_) => print!("Reading data from path: "),
+        Ok(_) => println!("Reading data from path: {}", &args[1]),
         Err(e) => display_help(e),
     };
 
