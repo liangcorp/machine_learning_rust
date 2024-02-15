@@ -13,14 +13,14 @@ pub fn sample_run(x: &[Vec<f64>], y: &[f64]) {
         Ok(theta) => {
             println!("Thetas are [0.0, 0.0], J(theta) is {:?}", theta);
         }
-        Err(e) => panic!("{}", e.get_ref().unwrap()),
+        Err(e) => eprint!("{}", e.get_ref().unwrap()),
     }
 
     match cost_functions::get_cost(x, y, &[-1.0, 2.0]) {
         Ok(theta) => {
             println!("Thetas are [-1.0, 2.0], J(theta) is {:?}", theta);
         }
-        Err(e) => panic!("{}", e.get_ref().unwrap()),
+        Err(e) => eprint!("{}", e.get_ref().unwrap()),
     }
 
     match gradient_descent::get_thetas(x, y, alpha, &mut theta, num_iters) {

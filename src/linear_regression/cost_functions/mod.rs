@@ -1,4 +1,4 @@
-//! Cost function with multiple features
+//! Cost function for single features
 //!
 //! This crate perform calculation of J(theta)
 
@@ -30,8 +30,13 @@ pub fn get_cost(x: &[Vec<f64>], y: &[f64], theta: &[f64]) -> Result<f64, io::Err
         return Err(Error::new(ErrorKind::Other, "Mis-matching training sets"));
     };
 
+    if x[0].len() > 2 {
+        return Err(Error::new(ErrorKind::Other, "cost function only support single feature...skipping...\n"));
+    }
+
     for i in x.iter().enumerate().take(num_train) {
         if i.1.len() != num_feat {
+            println!("{} {}", i.1.len(), num_feat);
             panic!(
                 "Missing matching number of elements in theta and X[{}]",
                 i.0
@@ -55,6 +60,9 @@ pub fn get_cost(x: &[Vec<f64>], y: &[f64], theta: &[f64]) -> Result<f64, io::Err
     //     h_x.push(sum);
     // }
 
+    // Cost function for linear regression
+    // MatLab equation:
+    // J = sum(((theta' * X')' - y).^2 ./(2 * m), "all");
     for j in 0..num_train {
         j_theta += (h_x[j] - y[j]) * (h_x[j] - y[j]) / (2 * num_train) as f64;
     }
