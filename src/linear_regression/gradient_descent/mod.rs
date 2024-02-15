@@ -20,20 +20,20 @@ use std::io::{Error, ErrorKind};
 ///
 ///
 pub fn get_thetas(
-    x: &[Vec<f64>],
-    y: &[f64],
+    x_mtrx: &[Vec<f64>],
+    y_vec: &[f64],
     alpha: f64,
     theta: &mut [f64],
     num_iters: u32,
 ) -> Result<Box<Vec<f64>>, io::Error> {
-    let num_train = y.len();
+    let num_train = y_vec.len();
     let num_feat = theta.len();
 
     let mut sum: f64;
     let mut tmp_theta: Vec<f64>;
     let mut h_x: Vec<f64> = Vec::new();
 
-    if x.len() != y.len() {
+    if x_mtrx.len() != y_vec.len() {
         return Err(Error::new(ErrorKind::Other, "Mis-matching training sets"));
     }
 
@@ -42,7 +42,7 @@ pub fn get_thetas(
 
         tmp_theta = theta.to_owned();
 
-        for i in x.iter().take(num_train) {
+        for i in x_mtrx.iter().take(num_train) {
             sum = 0.0;
 
             for j in 0..num_feat {
@@ -56,7 +56,7 @@ pub fn get_thetas(
             sum = 0.0;
 
             for i in 0..num_train {
-                sum += (h_x[i] - y[i]) * x[i][j];
+                sum += (h_x[i] - y_vec[i]) * x_mtrx[i][j];
             }
 
             theta[j] = tmp_theta[j] - (alpha * sum / (num_train) as f64);

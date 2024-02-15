@@ -17,24 +17,24 @@ use std::io::{Error, ErrorKind};
 /// J = sum(((theta[i] * X[j]) - y).^2 ./(2 * m), "all");
 ///
 
-pub fn get_cost(x: &[Vec<f64>], y: &[f64], theta: &[f64]) -> Result<f64, io::Error> {
+pub fn get_cost(x_mtrx: &[Vec<f64>], y_vec: &[f64], theta: &[f64]) -> Result<f64, io::Error> {
     let num_feat = theta.len();
     let mut h_x: Vec<f64> = vec![];
 
     let mut j_theta: f64 = 0.0; /* The cost */
     let mut sum: f64;
 
-    let num_train = if x.len() == y.len() {
-        y.len()
+    let num_train = if x_mtrx.len() == y_vec.len() {
+        y_vec.len()
     } else {
         return Err(Error::new(ErrorKind::Other, "Mis-matching training sets"));
     };
 
-    if x[0].len() > 2 {
+    if x_mtrx[0].len() > 2 {
         return Err(Error::new(ErrorKind::Other, "cost function only support single feature...skipping...\n"));
     }
 
-    for i in x.iter().enumerate().take(num_train) {
+    for i in x_mtrx.iter().enumerate().take(num_train) {
         if i.1.len() != num_feat {
             println!("{} {}", i.1.len(), num_feat);
             panic!(
@@ -44,7 +44,7 @@ pub fn get_cost(x: &[Vec<f64>], y: &[f64], theta: &[f64]) -> Result<f64, io::Err
         }
     }
 
-    for i in x.iter().enumerate().take(num_train) {
+    for i in x_mtrx.iter().enumerate().take(num_train) {
         sum = 0.0;
         for j in i.1.iter().enumerate().take(num_feat) {
             sum += *j.1 * theta[j.0];
@@ -64,7 +64,7 @@ pub fn get_cost(x: &[Vec<f64>], y: &[f64], theta: &[f64]) -> Result<f64, io::Err
     // MatLab equation:
     // J = sum(((theta' * X')' - y).^2 ./(2 * m), "all");
     for j in 0..num_train {
-        j_theta += (h_x[j] - y[j]) * (h_x[j] - y[j]) / (2 * num_train) as f64;
+        j_theta += (h_x[j] - y_vec[j]) * (h_x[j] - y_vec[j]) / (2 * num_train) as f64;
     }
 
     Ok(j_theta)
