@@ -8,8 +8,8 @@ pub mod normal_equation;
 
 // Sample run of linear regression
 pub fn sample_run(input_file_path: &Path) {
-    let alpha = 0.05; // the learning speed
-    let iterations = 20000; // Number of gradient descent iterations
+    let alpha = 0.1; // the learning speed
+    let iterations = 10000; // Number of gradient descent iterations
 
     // Read data from file
     let (x, y) = match read_data::get_data(input_file_path) {

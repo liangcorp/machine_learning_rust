@@ -31,7 +31,7 @@ pub fn get_thetas(
 
     let mut sum: f64;
     let mut tmp_theta: Vec<f64>;
-    let mut h_x: Vec<f64> = Vec::new();
+    let mut h_x: Vec<f64> = vec![];
 
     if x_mtrx.len() != y_vec.len() {
         return Err(Error::new(ErrorKind::Other, "Mis-matching training sets"));
@@ -42,14 +42,20 @@ pub fn get_thetas(
         //                 alpha * ((((temp[] * X[]) - y[]) * X(:,indx))/m);
         h_x.clear();
 
-        tmp_theta = theta.to_owned();
+        tmp_theta = theta.to_vec();
 
         for x_row in x_mtrx.iter() {
             sum = 0.0;
-
             for j in 0..num_feat {
                 sum += tmp_theta[j] * x_row[j];
             }
+
+            // not used due to slowness
+            // sum = x_row
+            //     .iter()
+            //     .zip(tmp_theta.iter())
+            //     .map(|(a, b)| a * b)
+            //     .sum();
 
             h_x.push(sum);
         }
