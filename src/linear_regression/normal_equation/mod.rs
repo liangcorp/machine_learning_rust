@@ -359,10 +359,10 @@ pub fn get_theta(x: &[Vec<f64>], y: &[f64]) -> Result<Box<Vec<f64>>, io::Error> 
     */
     let mut y_x_trans: Vec<f64> = Vec::new();
 
-    for j in 0..num_feat {
+    for i in 0..num_feat {
         sum = 0.0;
-        for i in 0..num_train {
-            sum += x[i][j] * y[i];
+        for j in 0..num_train {
+            sum += x[j][i] * y[j];
         }
         y_x_trans.push(sum);
     }
