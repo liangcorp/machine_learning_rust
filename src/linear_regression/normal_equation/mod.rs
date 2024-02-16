@@ -132,7 +132,7 @@ pub fn get_determinant(matrix: &[Vec<f64>]) -> Result<f64, io::Error> {
                     }
                 }
                 if !cofactor_row.is_empty() {
-                    cofactor.push(cofactor_row.clone());
+                    cofactor.push(cofactor_row.to_vec());
                     cofactor_row.clear();
                 }
             }
@@ -247,7 +247,7 @@ pub fn get_invert(matrix: &[Vec<f64>]) -> Result<Box<Vec<Vec<f64>>>, io::Error> 
                         }
                     }
                     if !mtrx_der_row.is_empty() {
-                        mtrx_der.push(mtrx_der_row.clone());
+                        mtrx_der.push(mtrx_der_row.to_vec());
                     }
                     mtrx_der_row.clear();
                 }
@@ -259,7 +259,7 @@ pub fn get_invert(matrix: &[Vec<f64>]) -> Result<Box<Vec<Vec<f64>>>, io::Error> 
                 mtrx_minors_row.push(tmp_der);
                 mtrx_der.clear();
             }
-            mtrx_minors.push(mtrx_minors_row.clone());
+            mtrx_minors.push(mtrx_minors_row.to_vec());
             mtrx_minors_row.clear();
         }
         // println!("Matrix minor: {:?}", mtrx_minors);
@@ -275,7 +275,7 @@ pub fn get_invert(matrix: &[Vec<f64>]) -> Result<Box<Vec<Vec<f64>>>, io::Error> 
         // println!("Cofactors of matrix minor: {:?}", mtrx_minors);
 
         // Transpose matrix
-        mtrx_trans = mtrx_minors.clone();
+        mtrx_trans = mtrx_minors.to_vec();
 
         for i in mtrx_minors.iter().enumerate().take(row) {
             for j in mtrx_trans.iter_mut().enumerate().take(col) {
@@ -284,7 +284,7 @@ pub fn get_invert(matrix: &[Vec<f64>]) -> Result<Box<Vec<Vec<f64>>>, io::Error> 
         }
         // println!("Matrix transposed: {:?}", mtrx_trans);
 
-        mtrx_result = mtrx_trans.clone();
+        mtrx_result = mtrx_trans.to_vec();
 
         for i in 0..row {
             for j in 0..col {
@@ -343,7 +343,7 @@ pub fn get_theta(x: &[Vec<f64>], y: &[f64]) -> Result<Box<Vec<f64>>, io::Error> 
             }
             mltply_rslt_row.push(sum); // results for each row
         }
-        mltply_rslt.push(mltply_rslt_row.clone());
+        mltply_rslt.push(mltply_rslt_row.to_vec());
     }
 
     /*
