@@ -45,11 +45,6 @@ pub fn get_data(path: &Path) -> Result<(Box<DoubleVecF64>, Box<Vec<f64>>), io::E
 
         for j in i.iter().map(|e| e.to_string().parse::<f64>()) {
             tmp_f64.push(j.unwrap());
-
-            // match j {
-            //     Ok(f) => tmp_f64.push(f),
-            //     Err(_) => (),
-            // }
         }
         x.push(tmp_f64);
     }

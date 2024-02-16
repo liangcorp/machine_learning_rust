@@ -6,7 +6,7 @@
 use std::io;
 use std::io::{Error, ErrorKind};
 
-/// # Gradient descent for a single feature (x\[1\])
+/// # Gradient descent
 ///
 /// - X and y are the training sets.
 /// - alpha is the learning rate
@@ -30,7 +30,6 @@ pub fn get_thetas(
     let num_feat = theta.len();
 
     let mut sum: f64;
-    let mut tmp_theta: Vec<f64>;
     let mut h_x: Vec<f64> = vec![];
 
     if x_mtrx.len() != y_vec.len() {
@@ -38,36 +37,25 @@ pub fn get_thetas(
     }
 
     for _ in 0..iterations {
-        // theta(indx,:) = theta(indx,:) -
-        //                 alpha * ((((temp[] * X[]) - y[]) * X(:,indx))/m);
         h_x.clear();
-
-        tmp_theta = theta.to_vec();
 
         for x_row in x_mtrx.iter() {
             sum = 0.0;
             for j in 0..num_feat {
-                sum += tmp_theta[j] * x_row[j];
+                sum += theta[j] * x_row[j];
             }
-
-            // not used due to slowness
-            // sum = x_row
-            //     .iter()
-            //     .zip(tmp_theta.iter())
-            //     .map(|(a, b)| a * b)
-            //     .sum();
 
             h_x.push(sum);
         }
 
-        for j in 0..num_feat {
+        for (j, t) in theta.iter_mut().enumerate().take(num_feat) {
             sum = 0.0;
 
             for i in 0..num_train {
                 sum += (h_x[i] - y_vec[i]) * x_mtrx[i][j];
             }
 
-            theta[j] = tmp_theta[j] - (alpha * sum / num_train as f64);
+            *t -= alpha * sum / num_train as f64;
         }
     }
 
