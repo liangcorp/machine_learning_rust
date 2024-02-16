@@ -1,9 +1,7 @@
-use core::panic;
 pub use std::path::Path;
 use std::{env, io};
 
 use ml_rust::linear_regression;
-use ml_rust::read_data;
 
 const ARGS_SIZE_LIMIT: usize = 2;
 
@@ -39,14 +37,8 @@ fn main() {
         Err(e) => display_help(e),
     };
 
-    let input_file_path = Path::new(&args[1]);
-
-    // Read data from file
-    let (x_ptr, y_ptr) = match read_data::get_data(input_file_path) {
-        Ok((x_ptr, y_ptr)) => (x_ptr, y_ptr),
-        Err(e) => panic!("{}", e.get_ref().unwrap()),
-    };
+    let data_file_path = Path::new(&args[1]);
 
     // sample run of linear regression with data file
-    linear_regression::sample_run(&x_ptr, &y_ptr);
+    linear_regression::sample_run(data_file_path);
 }
