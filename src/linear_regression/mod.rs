@@ -9,18 +9,18 @@ pub mod normal_equation;
 // Sample run of linear regression
 pub fn sample_run(input_file_path: &Path) {
     let alpha = 0.1; // the learning speed
-    let num_iters = 5000; // Number of gradient descent iterations
+    let iterations = 5000; // Number of gradient descent iterations
 
     // Read data from file
     let (x, y) = match read_data::get_data(input_file_path) {
         Ok((x_ptr, y_ptr)) => (*x_ptr, *y_ptr),
         Err(e) => panic!("{}", e.get_ref().unwrap()),
     };
-    let theta = vec![0.0; x[0].len()]; // set theta 0 and theta 1 to 0.0
+    let mut theta = vec![0.0; x[0].len()]; // set theta 0 and theta 1 to 0.0
 
-    match gradient_descent::get_thetas(&x, &y, alpha, &theta, num_iters) {
+    match gradient_descent::get_thetas(&x, &y, alpha, &mut theta, iterations) {
         Ok(theta) => {
-            print!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations (skipping theta 0): [", alpha, num_iters);
+            print!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations (skipping theta 0): [", alpha, iterations);
             for t in theta.iter().skip(1) {
                 print!(" {} ", t);
             }

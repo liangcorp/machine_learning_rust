@@ -23,7 +23,7 @@ pub fn get_thetas(
     x_mtrx: &[Vec<f64>],
     y_vec: &[f64],
     alpha: f64,
-    theta: &[f64],
+    theta: &mut [f64],
     iterations: u32,
 ) -> Result<Box<Vec<f64>>, io::Error> {
     let m = y_vec.len(); // no of training sets
@@ -32,7 +32,6 @@ pub fn get_thetas(
     let mut sum: f64;
     let mut tmp_theta: Vec<f64>;
     let mut h_x: Vec<f64> = Vec::new();
-    let mut j_theta: Vec<f64> = (*theta).to_vec();
 
     if x_mtrx.len() != y_vec.len() {
         return Err(Error::new(ErrorKind::Other, "Mis-matching training sets"));
@@ -62,9 +61,9 @@ pub fn get_thetas(
                 sum += (h_x[i] - y_vec[i]) * x_mtrx[i][j];
             }
 
-            j_theta[j] = tmp_theta[j] - (alpha * sum / m as f64);
+            theta[j] = tmp_theta[j] - (alpha * sum / m as f64);
         }
     }
 
-    Ok(Box::new(j_theta))
+    Ok(Box::new(theta.to_vec()))
 }
