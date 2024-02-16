@@ -5,13 +5,13 @@ pub mod normal_equation;
 
 // Sample run of linear regression
 pub fn sample_run(x: &[Vec<f64>], y: &[f64]) {
-    let alpha = 0.01; // the learning speed
-    let num_iters = 2500; // Number of gradient descent iterations
+    let alpha = 0.1; // the learning speed
+    let num_iters = 5000; // Number of gradient descent iterations
     let mut theta = vec![0.0; x[0].len()]; // set theta 0 and theta 1 to 0.0
 
     match gradient_descent::get_thetas(x, y, alpha, &mut theta, num_iters) {
         Ok(theta) => {
-            print!("Found thetas using Gradient Descent (skipping theta 0): [");
+            print!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations (skipping theta 0): [", alpha, num_iters);
             for t in theta.iter().skip(1) {
                 print!(" {} ", t);
             }
