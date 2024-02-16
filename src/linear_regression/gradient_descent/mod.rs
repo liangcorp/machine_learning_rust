@@ -26,7 +26,7 @@ pub fn get_thetas(
     theta: &mut [f64],
     iterations: u32,
 ) -> Result<Box<Vec<f64>>, io::Error> {
-    let m = y_vec.len(); // no of training sets
+    let num_train = y_vec.len(); // no of training sets
     let num_feat = theta.len();
 
     let mut sum: f64;
@@ -57,11 +57,11 @@ pub fn get_thetas(
         for j in 0..num_feat {
             sum = 0.0;
 
-            for i in 0..m {
+            for i in 0..num_train {
                 sum += (h_x[i] - y_vec[i]) * x_mtrx[i][j];
             }
 
-            theta[j] = tmp_theta[j] - (alpha * sum / m as f64);
+            theta[j] = tmp_theta[j] - (alpha * sum / num_train as f64);
         }
     }
 
