@@ -22,7 +22,7 @@ use std::io::{Error, ErrorKind};
 pub fn get_thetas(
     x_mtrx: &[Vec<f64>],
     y_vec: &[f64],
-    alpha: f64,
+    alpha: f32,
     theta: &mut [f64],
     iterations: u32,
 ) -> Result<Box<Vec<f64>>, io::Error> {
