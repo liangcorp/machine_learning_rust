@@ -32,7 +32,7 @@ pub fn get_thetas(
     let mut sum: f64;
     let mut h_x = vec![0.0; num_train];
 
-    if x_mtrx.len() != y_vec.len() {
+    if x_mtrx.len() != num_train {
         return Err(Error::new(ErrorKind::Other, "Mis-matching training sets"));
     }
 
@@ -40,7 +40,7 @@ pub fn get_thetas(
     // to speeds up the execution by a little
     let mut x_vec_slice: Vec<&[f64]> = Vec::with_capacity(num_train);
 
-    for x_row in x_mtrx.iter() {
+    for x_row in x_mtrx.iter().take(num_train) {
         x_vec_slice.push(&x_row[..]);
     }
 
