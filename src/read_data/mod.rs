@@ -20,8 +20,8 @@ pub fn get_data(path: &Path) -> Result<(Box<DoubleVecF64>, Box<Vec<f64>>), io::E
         }
     };
 
-    let mut y: Vec<f64> = Vec::new();
-    let mut v: Vec<String> = Vec::new();
+    let mut y: Vec<f64> = vec![];
+    let mut v: Vec<String> = vec![];
 
     // Read the file line by line
     // split each line by the last ',' into two vectors of v and y
@@ -32,13 +32,13 @@ pub fn get_data(path: &Path) -> Result<(Box<DoubleVecF64>, Box<Vec<f64>>), io::E
         }
     }
 
-    let mut tmp: Vec<Vec<&str>> = Vec::new();
+    let mut tmp: Vec<Vec<&str>> = vec![];
 
     for i in v.iter() {
         tmp.push(i.split(',').collect::<Vec<&str>>());
     }
 
-    let mut x: Vec<Vec<f64>> = Vec::new();
+    let mut x: Vec<Vec<f64>> = vec![];
 
     for i in tmp.iter() {
         let mut tmp_f64: Vec<f64> = vec![1.0];
@@ -46,7 +46,7 @@ pub fn get_data(path: &Path) -> Result<(Box<DoubleVecF64>, Box<Vec<f64>>), io::E
         for j in i.iter().map(|e| e.to_string().parse::<f64>()) {
             tmp_f64.push(j.unwrap());
         }
-        x.push(tmp_f64);
+        x.push(tmp_f64.to_vec());
     }
 
     Ok((Box::new(x), Box::new(y)))
