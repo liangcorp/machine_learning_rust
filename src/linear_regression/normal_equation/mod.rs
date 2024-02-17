@@ -111,10 +111,10 @@ pub fn get_determinant(matrix: &[Vec<f64>]) -> Result<f64, io::Error> {
             |A| = Cof_A[0][0] * D[0] - Cof_A[1][0] * D[1]
                 + Cof_A[2][0] * D[2] - Cof_A[3][0] * D[3]
         */
-        let mut cofactor_row: Vec<f64> = Vec::new();
-        let mut cofactor: Vec<Vec<f64>> = Vec::new();
-        let mut first_col_elemnt: Vec<f64> = Vec::new();
-        let mut deter_list: Vec<f64> = Vec::new();
+        let mut cofactor_row: Vec<f64> = Vec::with_capacity(num_feat);
+        let mut cofactor: Vec<Vec<f64>> = Vec::with_capacity(num_feat);
+        let mut first_col_elemnt: Vec<f64> = Vec::with_capacity(num_feat);
+        let mut deter_list: Vec<f64> = Vec::with_capacity(num_feat);
 
         let j = 0;
         for i in 0..num_feat {
@@ -222,16 +222,16 @@ pub fn get_invert(matrix: &[Vec<f64>]) -> Result<Box<Vec<Vec<f64>>>, io::Error> 
         mtrx_result[0][1] = -matrix[0][1] / determinant;
         mtrx_result[1][0] = -matrix[1][0] / determinant;
     } else {
-        let mut mtrx_der: Vec<Vec<f64>> = Vec::new();
-        let mut mtrx_der_row: Vec<f64> = Vec::new();
-
-        let mut mtrx_minors: Vec<Vec<f64>> = Vec::new();
-        let mut mtrx_minors_row: Vec<f64> = Vec::new();
-
-        let mut mtrx_trans: Vec<Vec<f64>>;
-
         let row = matrix.len();
         let col = matrix[0].len();
+
+        let mut mtrx_der: Vec<Vec<f64>> = Vec::with_capacity(col);
+        let mut mtrx_der_row: Vec<f64> = Vec::with_capacity(row);
+
+        let mut mtrx_minors: Vec<Vec<f64>> = Vec::with_capacity(col);
+        let mut mtrx_minors_row: Vec<f64> = Vec::with_capacity(row);
+
+        let mut mtrx_trans: Vec<Vec<f64>>;
 
         if row != col {
             return Err(Error::new(ErrorKind::Other, "Matrix not symmetrical"));
@@ -307,12 +307,6 @@ pub fn get_invert(matrix: &[Vec<f64>]) -> Result<Box<Vec<Vec<f64>>>, io::Error> 
 /// - Slow if number of features is very large (10,000+)
 ///
 pub fn get_theta(x: &[Vec<f64>], y: &[f64]) -> Result<Box<Vec<f64>>, io::Error> {
-    let mut theta: Vec<f64> = Vec::new();
-    let mut mltply_rslt: Vec<Vec<f64>> = Vec::new();
-    let mut mltply_rslt_row: Vec<f64> = Vec::new();
-
-    let mut sum: f64;
-
     let num_train = if x.len() == y.len() {
         x.len()
     } else {
@@ -320,6 +314,13 @@ pub fn get_theta(x: &[Vec<f64>], y: &[f64]) -> Result<Box<Vec<f64>>, io::Error> 
     };
 
     let num_feat = x[0].len();
+
+    let mut theta: Vec<f64> = Vec::with_capacity(num_feat);
+    let mut mltply_rslt: Vec<Vec<f64>> = Vec::with_capacity(num_train);
+    let mut mltply_rslt_row: Vec<f64> = Vec::with_capacity(num_feat);
+
+    let mut sum: f64;
+
 
     /*
         X = [[A, B],
@@ -357,7 +358,7 @@ pub fn get_theta(x: &[Vec<f64>], y: &[f64]) -> Result<Box<Vec<f64>>, io::Error> 
     /*
         Calculate y * X.transposed
     */
-    let mut y_x_trans: Vec<f64> = Vec::new();
+    let mut y_x_trans: Vec<f64> = Vec::with_capacity(num_feat);
 
     for i in 0..num_feat {
         sum = 0.0;
