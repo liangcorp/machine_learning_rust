@@ -6,8 +6,7 @@ pub mod cost_functions;
 pub mod gradient_descent;
 pub mod normal_equation;
 
-const ITERATIONS: u32 = 20000; // the learning speed
-const ALPHA: f32 = 0.1; // Number of gradient descent iterations
+const ITERATIONS: u32 = 5000; // the learning speed
 
 // Sample run of linear regression
 pub fn sample_run(input_file_path: &Path) {
@@ -18,9 +17,16 @@ pub fn sample_run(input_file_path: &Path) {
     };
     let mut theta = vec![0.0; x[0].len()]; // set theta 0 and theta 1 to 0.0
 
-    match gradient_descent::get_thetas(&x, &y, ALPHA, &mut theta, ITERATIONS) {
+    // set the learning rate = no of features / 10
+    let alpha = if x[0].len() < 3 {
+        0.01
+    } else {
+        x[0].len() as f64 / 10.0
+    };
+
+    match gradient_descent::get_thetas(&x, &y, alpha, &mut theta, ITERATIONS) {
         Ok(theta) => {
-            print!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations (skipping theta 0): [", ALPHA, ITERATIONS);
+            print!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations (skipping theta 0): [", alpha, ITERATIONS);
             for t in theta.iter().skip(1) {
                 print!(" {} ", t);
             }
