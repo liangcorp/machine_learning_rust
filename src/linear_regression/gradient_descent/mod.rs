@@ -20,25 +20,25 @@ use std::io::{Error, ErrorKind};
 ///
 ///
 pub fn get_thetas(
-    x_mtrx: &[Vec<f64>],
-    y_vec: &[f64],
-    alpha: f64,
-    theta: &mut [f64],
+    x_mtrx: &[Vec<f32>],
+    y_vec: &[f32],
+    alpha: f32,
+    theta: &mut [f32],
     iterations: u32,
-) -> Result<Box<Vec<f64>>, io::Error> {
+) -> Result<Box<Vec<f32>>, io::Error> {
     let num_train = y_vec.len(); // no of training sets
     let num_feat = theta.len();
 
-    let mut sum: f64;
+    let mut sum: f32;
     let mut h_x = vec![0.0; num_train];
 
     if x_mtrx.len() != num_train {
         return Err(Error::new(ErrorKind::Other, "Mis-matching training sets"));
     }
 
-    // Convert Vec<Vec<f64>> to &[&[f64]]
+    // Convert Vec<Vec<f32>> to &[&[f32]]
     // to speeds up the execution by a little
-    let mut x_vec_slice: Vec<&[f64]> = Vec::with_capacity(num_train);
+    let mut x_vec_slice: Vec<&[f32]> = Vec::with_capacity(num_train);
 
     for x_row in x_mtrx.iter().take(num_train) {
         x_vec_slice.push(&x_row[..]);
@@ -66,7 +66,7 @@ pub fn get_thetas(
                 sum += (h_x[i] - y_vec[i]) * x_slice[i][j];
             }
 
-            *t -= alpha * sum / num_train as f64;
+            *t -= alpha * sum / num_train as f32;
         }
     }
 

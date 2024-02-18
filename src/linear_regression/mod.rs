@@ -21,16 +21,12 @@ pub fn sample_run(input_file_path: &Path) {
     let alpha = if x[0].len() < 3 {
         0.01
     } else {
-        x[0].len() as f64 / 10.0
+        x[0].len() as f32 / 10.0
     };
 
     match gradient_descent::get_thetas(&x, &y, alpha, &mut theta, ITERATIONS) {
         Ok(theta) => {
-            print!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations (skipping theta 0): [", alpha, ITERATIONS);
-            for t in theta.iter().skip(1) {
-                print!(" {} ", t);
-            }
-            println!("]");
+            print!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations: {:?}", alpha, ITERATIONS, theta);
         }
         Err(e) => panic!("{}", e.get_ref().unwrap()),
     }
