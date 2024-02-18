@@ -100,7 +100,7 @@ pub fn get_thetas_flatten_x(
             i += num_feat;
         }
 
-        for (j, t) in theta.iter_mut().enumerate().take(num_feat) {
+        for j in 0..num_feat {
             sum = 0.0;
             k = 0;
 
@@ -109,7 +109,7 @@ pub fn get_thetas_flatten_x(
                 k += num_feat;
             }
 
-            *t -= alpha * sum / num_train as f32;
+            theta[j] -= alpha * sum / num_train as f32;
         }
     }
 
