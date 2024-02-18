@@ -25,7 +25,7 @@ pub fn get_thetas(
     alpha: f32,
     theta: &mut [f32],
     iterations: u32,
-) -> Result<Box<Vec<f32>>, io::Error> {
+) -> Result<Vec<f32>, io::Error> {
     let num_train = y_vec.len(); // no of training sets
     let num_feat = theta.len();
 
@@ -70,7 +70,7 @@ pub fn get_thetas(
         }
     }
 
-    Ok(Box::new(theta.to_vec()))
+    Ok(theta.to_vec())
 }
 
 pub fn get_thetas_flatten_x(
@@ -79,7 +79,7 @@ pub fn get_thetas_flatten_x(
     alpha: f32,
     theta: &mut [f32],
     iterations: u32,
-) -> Result<Box<Vec<f32>>, io::Error> {
+) -> Result<Vec<f32>, io::Error> {
     let num_train = y_vec.len(); // no of training sets
     let num_feat = theta.len();
 
@@ -113,5 +113,5 @@ pub fn get_thetas_flatten_x(
         }
     }
 
-    Ok(Box::new(theta.to_vec()))
+    Ok(theta.to_vec())
 }

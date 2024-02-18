@@ -26,14 +26,14 @@ pub fn sample_run(input_file_path: &Path) {
 
     // match gradient_descent::get_thetas(&x, &y, alpha, &mut theta, ITERATIONS) {
     //     Ok(theta) => {
-    //         print!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations: {:?}", alpha, ITERATIONS, theta);
+    //         print!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations: {:?}", alpha, ITERATIONS, &theta[1..]);
     //     }
     //     Err(e) => panic!("{}", e.get_ref().unwrap()),
     // }
 
     match gradient_descent::get_thetas_flatten_x(&flattened_x, &y, alpha, &mut theta, ITERATIONS) {
         Ok(theta) => {
-            println!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations: {:?}", alpha, ITERATIONS, &theta[1..]);
+            println!("Gradient Descent with learning speed {} and {} number of iterations:\n {:?}", alpha, ITERATIONS, &theta[1..]);
         }
         Err(e) => panic!("{}", e.get_ref().unwrap()),
     }

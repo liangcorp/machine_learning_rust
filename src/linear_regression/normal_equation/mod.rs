@@ -8,7 +8,6 @@ use std::io::{Error, ErrorKind};
 /// Calculate the Determinant (der) of larger scale matrix.
 /// Tested for 2x2, 3x3 and 4x4 matrixes.
 /// Implementation is not optimized for super large matrixes.
-///
 pub fn get_determinant(matrix: &[Vec<f64>]) -> Result<f64, io::Error> {
     let mut z: i32;
     let mut determinant: f64 = 0.0;
@@ -207,7 +206,7 @@ pub fn get_determinant(matrix: &[Vec<f64>]) -> Result<f64, io::Error> {
            [0.2, -0.3, 0]]
 */
 
-pub fn get_invert(matrix: &[Vec<f64>]) -> Result<Box<Vec<Vec<f64>>>, io::Error> {
+pub fn get_invert(matrix: &[Vec<f64>]) -> Result<Vec<Vec<f64>>, io::Error> {
     let mut mtrx_result: Vec<Vec<f64>>;
     let determinant: f64 = match get_determinant(matrix) {
         Ok(determinant) => determinant,
@@ -294,7 +293,7 @@ pub fn get_invert(matrix: &[Vec<f64>]) -> Result<Box<Vec<Vec<f64>>>, io::Error> 
         // println!("Inverted matrix: {:?}", mtrx_result);
     }
 
-    Ok(Box::new(mtrx_result))
+    Ok(mtrx_result)
 }
 
 ///
@@ -380,10 +379,10 @@ pub fn get_theta(x: &[Vec<f64>], y: &[f64]) -> Result<Box<Vec<f64>>, io::Error> 
             theta = invrt_mtrx * y_x_trans
     */
 
-    for i in 0..num_feat {
+    for invrt_row in invrt_mtrx.iter() {
         sum = 0.0;
         for j in y_x_trans.iter().enumerate().take(num_feat) {
-            sum += invrt_mtrx[i][j.0] * j.1;
+            sum += invrt_row[j.0] * j.1;
         }
         theta.push(sum);
     }
