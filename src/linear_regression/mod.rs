@@ -24,13 +24,19 @@ pub fn sample_run(input_file_path: &Path) {
         x[0].len() as f32 / 10.0
     };
 
-    match gradient_descent::get_thetas(&x, &y, alpha, &mut theta, ITERATIONS) {
+    // match gradient_descent::get_thetas(&x, &y, alpha, &mut theta, ITERATIONS) {
+    //     Ok(theta) => {
+    //         print!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations: {:?}", alpha, ITERATIONS, theta);
+    //     }
+    //     Err(e) => panic!("{}", e.get_ref().unwrap()),
+    // }
+
+    match gradient_descent::get_thetas_flatten_x(&x, &y, alpha, &mut theta, ITERATIONS) {
         Ok(theta) => {
             print!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations: {:?}", alpha, ITERATIONS, theta);
         }
         Err(e) => panic!("{}", e.get_ref().unwrap()),
     }
-
     // match normal_equation::get_theta(&x, &y) {
     //     Ok(theta) => {
     //         print!("Found thetas using Normal Equation (skipping theta 0): [");

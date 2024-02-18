@@ -80,7 +80,35 @@ pub fn get_thetas_flatten_x(
     theta: &mut [f32],
     iterations: u32,
 ) -> Result<Box<Vec<f32>>, io::Error> {
-    let flattened_vec: Vec<f32> = x_mtrx.to_vec().into_iter().flatten().collect();
+    let num_train = y_vec.len(); // no of training sets
+    let num_feat = theta.len();
 
+    let mut sum: f32;
+    let mut h_x = Vec::with_capacity(num_train);
+    let mut i = 0;
+    let flattened_x: Vec<f32> = x_mtrx.iter().flatten().cloned().collect();
+
+    for _ in 0..iterations {
+        h_x.clear();
+        while i < num_train * num_feat {
+            sum = 0.0;
+            for j in 0..num_feat {
+                sum += theta[j] * flattened_x[i + j];
+            }
+
+            h_x.push(sum);
+            i += num_feat;
+        }
+
+        for (j, t) in theta.iter_mut().enumerate().take(num_feat) {
+            sum = 0.0;
+
+            for i in 0..num_train {
+                sum += (h_x[i] - y_vec[i]) * flattened_x[i + num_feat + j];
+            }
+
+            *t -= alpha * sum / num_train as f32;
+        }
+    }
     Ok(Box::new(vec![0.0]))
 }
