@@ -6,7 +6,7 @@ use std::path::Path;
 
 type DoubleVecF64 = Vec<Vec<f32>>;
 
-pub fn get_data(path: &Path) -> Result<(DoubleVecF64, Vec<f32>, Vec<f32>), io::Error> {
+pub fn get_data(path: &Path) -> Result<(DoubleVecF64, Vec<f32>), io::Error> {
     let lines = match File::open(path) {
         Ok(file) => io::BufReader::new(file).lines(),
         Err(ref error) if error.kind() == ErrorKind::NotFound => {
@@ -39,7 +39,6 @@ pub fn get_data(path: &Path) -> Result<(DoubleVecF64, Vec<f32>, Vec<f32>), io::E
     }
 
     let mut x: Vec<Vec<f32>> = vec![];
-    let mut flatten_x: Vec<f32> = vec![];
 
     for i in tmp.iter() {
         let mut tmp_f32: Vec<f32> = vec![1.0];
@@ -48,8 +47,50 @@ pub fn get_data(path: &Path) -> Result<(DoubleVecF64, Vec<f32>, Vec<f32>), io::E
             tmp_f32.push(j.unwrap());
         }
         x.push(tmp_f32.to_vec());
-        flatten_x = [&flatten_x[..], &tmp_f32[..]].concat();
     }
 
-    Ok((x, flatten_x, y))
+    Ok((x, y))
+}
+
+pub fn get_data_flat_x(path: &Path) -> Result<(Vec<f32>, usize, Vec<f32>), io::Error> {
+    let lines = match File::open(path) {
+        Ok(file) => io::BufReader::new(file).lines(),
+        Err(ref error) if error.kind() == ErrorKind::NotFound => {
+            return Err(Error::new(ErrorKind::NotFound, "File not found"));
+        }
+        Err(error) if error.kind() == ErrorKind::PermissionDenied => {
+            return Err(Error::new(ErrorKind::PermissionDenied, "Permission denied"));
+        }
+        Err(_) => {
+            return Err(Error::new(ErrorKind::Other, "Can not open file."));
+        }
+    };
+
+    let mut y: Vec<f32> = vec![];
+    let mut v: Vec<f32> = vec![];
+
+    // Read the file line by line
+    // split each line by the last ',' into two vectors of v and y
+    for line in lines {
+        if let Some(data_tuple) = line.unwrap().rsplit_once(',') {
+            // add X_0
+            v = [&v, &vec![1.0][..]].concat();
+            v = [
+                &v,
+                &data_tuple
+                    .0
+                    .split(',')
+                    .collect::<Vec<&str>>()
+                    .iter()
+                    .map(|e| e.to_string().parse::<f32>().ok().unwrap())
+                    .collect::<Vec<f32>>()[..],
+            ]
+            .concat();
+            y.push(data_tuple.1.parse::<f32>().expect("Failed"));
+        }
+    }
+
+    let num_feat = v.len() / y.len();
+
+    Ok((v, num_feat, y))
 }
