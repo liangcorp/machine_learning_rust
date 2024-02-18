@@ -11,8 +11,8 @@ const ITERATIONS: u32 = 5000; // the learning speed
 // Sample run of linear regression
 pub fn sample_run(input_file_path: &Path) {
     // Read data from file
-    let (x, y) = match read_data::get_data(input_file_path) {
-        Ok((x_ptr, y_ptr)) => (*x_ptr, *y_ptr),
+    let (x, flattened_x, y) = match read_data::get_data(input_file_path) {
+        Ok((x_ptr, flattened_x_ptr, y_ptr)) => (*x_ptr, *flattened_x_ptr, *y_ptr),
         Err(e) => panic!("{}", e.get_ref().unwrap()),
     };
     let mut theta = vec![0.0; x[0].len()]; // set theta 0 and theta 1 to 0.0
@@ -31,9 +31,9 @@ pub fn sample_run(input_file_path: &Path) {
     //     Err(e) => panic!("{}", e.get_ref().unwrap()),
     // }
 
-    match gradient_descent::get_thetas_flatten_x(&x, &y, alpha, &mut theta, ITERATIONS) {
+    match gradient_descent::get_thetas_flatten_x(&flattened_x, &y, alpha, &mut theta, ITERATIONS) {
         Ok(theta) => {
-            print!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations: {:?}", alpha, ITERATIONS, theta);
+            println!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations: {:?}", alpha, ITERATIONS, &theta[1..]);
         }
         Err(e) => panic!("{}", e.get_ref().unwrap()),
     }

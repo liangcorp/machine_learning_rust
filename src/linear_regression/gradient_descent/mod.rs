@@ -74,7 +74,7 @@ pub fn get_thetas(
 }
 
 pub fn get_thetas_flatten_x(
-    x_mtrx: &[Vec<f32>],
+    flattened_x: &[f32],
     y_vec: &[f32],
     alpha: f32,
     theta: &mut [f32],
@@ -85,7 +85,6 @@ pub fn get_thetas_flatten_x(
 
     let mut sum: f32;
     let mut h_x = Vec::with_capacity(num_train);
-    let flattened_x: Vec<f32> = x_mtrx.iter().flatten().cloned().collect();
 
     for _ in 0..iterations {
         let mut i = 0;
@@ -104,8 +103,10 @@ pub fn get_thetas_flatten_x(
         for (j, t) in theta.iter_mut().enumerate().take(num_feat) {
             sum = 0.0;
 
+            let mut k = 0;
             for i in 0..num_train {
-                sum += (h_x[i] - y_vec[i]) * flattened_x[i + num_feat + j];
+                sum += (h_x[i] - y_vec[i]) * flattened_x[k + j];
+                k += num_feat;
             }
 
             *t -= alpha * sum / num_train as f32;

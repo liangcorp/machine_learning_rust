@@ -6,7 +6,7 @@ use std::path::Path;
 
 type DoubleVecF64 = Vec<Vec<f32>>;
 
-pub fn get_data(path: &Path) -> Result<(Box<DoubleVecF64>, Box<Vec<f32>>), io::Error> {
+pub fn get_data(path: &Path) -> Result<(Box<DoubleVecF64>, Box<Vec<f32>>, Box<Vec<f32>>), io::Error> {
     let lines = match File::open(path) {
         Ok(file) => io::BufReader::new(file).lines(),
         Err(ref error) if error.kind() == ErrorKind::NotFound => {
@@ -39,6 +39,7 @@ pub fn get_data(path: &Path) -> Result<(Box<DoubleVecF64>, Box<Vec<f32>>), io::E
     }
 
     let mut x: Vec<Vec<f32>> = vec![];
+    let mut flatten_x: Vec<f32> = vec![];
 
     for i in tmp.iter() {
         let mut tmp_f32: Vec<f32> = vec![1.0];
@@ -47,7 +48,8 @@ pub fn get_data(path: &Path) -> Result<(Box<DoubleVecF64>, Box<Vec<f32>>), io::E
             tmp_f32.push(j.unwrap());
         }
         x.push(tmp_f32.to_vec());
+        flatten_x = [&flatten_x[..], &tmp_f32[..]].concat();
     }
 
-    Ok((Box::new(x), Box::new(y)))
+    Ok((Box::new(x), Box::new(flatten_x), Box::new(y)))
 }
