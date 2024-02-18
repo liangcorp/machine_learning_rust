@@ -82,14 +82,13 @@ pub fn get_thetas_flatten_x(
     iterations: u32,
 ) -> Result<Vec<f32>, io::Error> {
     let num_train = y_vec.len(); // no of training sets
-                                 // let num_feat = theta.len();
 
     let mut sum: f32;
-    let mut h_x = Vec::with_capacity(num_train);
+    let mut k;
 
     for _ in 0..iterations {
+        let mut h_x = Vec::with_capacity(num_train);
         let mut i = 0;
-        h_x.clear();
 
         while i < num_train * num_feat {
             sum = 0.0;
@@ -103,8 +102,8 @@ pub fn get_thetas_flatten_x(
 
         for (j, t) in theta.iter_mut().enumerate().take(num_feat) {
             sum = 0.0;
+            k = 0;
 
-            let mut k = 0;
             for i in 0..num_train {
                 sum += (h_x[i] - y_vec[i]) * flattened_x[k + j];
                 k += num_feat;

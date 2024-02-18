@@ -66,8 +66,8 @@ pub fn get_data_flat_x(path: &Path) -> Result<(Vec<f32>, usize, Vec<f32>), io::E
         }
     };
 
-    let mut y: Vec<f32> = vec![];
     let mut flatten_x: Vec<f32> = vec![];
+    let mut y: Vec<f32> = vec![];
 
     // Read the file line by line
     // split each line by the last ',' into two vectors of flatten_x and y
