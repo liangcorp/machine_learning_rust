@@ -72,3 +72,15 @@ pub fn get_thetas(
 
     Ok(Box::new(theta.to_vec()))
 }
+
+pub fn get_thetas_flatten_x(
+    x_mtrx: &[Vec<f32>],
+    y_vec: &[f32],
+    alpha: f32,
+    theta: &mut [f32],
+    iterations: u32,
+) -> Result<Box<Vec<f32>>, io::Error> {
+    let flattened_vec: Vec<f32> = x_mtrx.to_vec().into_iter().flatten().collect();
+
+    Ok(Box::new(vec![0.0]))
+}
