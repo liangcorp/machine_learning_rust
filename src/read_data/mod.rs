@@ -67,30 +67,33 @@ pub fn get_data_flat_x(path: &Path) -> Result<(Vec<f32>, usize, Vec<f32>), io::E
     };
 
     let mut y: Vec<f32> = vec![];
-    let mut v: Vec<f32> = vec![];
+    let mut flatten_x: Vec<f32> = vec![];
 
     // Read the file line by line
-    // split each line by the last ',' into two vectors of v and y
+    // split each line by the last ',' into two vectors of flatten_x and y
+    // parse string into f32
     for line in lines {
         if let Some(data_tuple) = line.unwrap().rsplit_once(',') {
             // add X_0
-            v = [&v, &vec![1.0][..]].concat();
-            v = [
-                &v,
+            flatten_x = [&flatten_x, &vec![1.0][..]].concat();
+
+            // add rest of line of X
+            flatten_x = [
+                &flatten_x,
                 &data_tuple
                     .0
                     .split(',')
-                    .collect::<Vec<&str>>()
-                    .iter()
                     .map(|e| e.to_string().parse::<f32>().ok().unwrap())
                     .collect::<Vec<f32>>()[..],
             ]
             .concat();
+
+            // add result Y
             y.push(data_tuple.1.parse::<f32>().expect("Failed"));
         }
     }
 
-    let num_feat = v.len() / y.len();
+    let num_feat = flatten_x.len() / y.len();
 
-    Ok((v, num_feat, y))
+    Ok((flatten_x, num_feat, y))
 }
