@@ -33,10 +33,16 @@ pub fn sample_run(input_file_path: &Path) {
 
     match gradient_descent::get_thetas_flatten_x(&flattened_x, &y, alpha, &mut theta, ITERATIONS) {
         Ok(theta) => {
-            println!("Gradient Descent with learning speed {} and {} number of iterations:\n {:?}", alpha, ITERATIONS, &theta[1..]);
+            println!(
+                "Gradient Descent with learning speed {} and {} number of iterations:\n {:?}",
+                alpha,
+                ITERATIONS,
+                &theta[1..]
+            );
         }
         Err(e) => panic!("{}", e.get_ref().unwrap()),
     }
+
     // match normal_equation::get_theta(&x, &y) {
     //     Ok(theta) => {
     //         print!("Found thetas using Normal Equation (skipping theta 0): [");
@@ -47,7 +53,7 @@ pub fn sample_run(input_file_path: &Path) {
     //     }
     //     Err(e) => panic!("{}", e.get_ref().unwrap()),
     // }
-    //
+
     // match cost_functions::get_cost(&x, &y, &theta) {
     //     Ok(j_theta) => {
     //         println!("Thetas are {:?}, J(theta) is {:?}", theta, j_theta);
