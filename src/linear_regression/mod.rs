@@ -12,7 +12,7 @@ const ITERATIONS: u32 = 5000; // the learning speed
 pub fn sample_run(input_file_path: &Path) {
     // Read data from file
     let (x, flattened_x, y) = match read_data::get_data(input_file_path) {
-        Ok((x_ptr, flattened_x_ptr, y_ptr)) => (*x_ptr, *flattened_x_ptr, *y_ptr),
+        Ok((x, flattened_x, y)) => (x, flattened_x, y),
         Err(e) => panic!("{}", e.get_ref().unwrap()),
     };
     let mut theta = vec![0.0; x[0].len()]; // set theta 0 and theta 1 to 0.0
