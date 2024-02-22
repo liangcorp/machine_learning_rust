@@ -28,12 +28,23 @@ pub fn sample_run(input_file_path: &Path) {
     let start = Instant::now();
     match gradient_descent::get_thetas(&x, &y, alpha, &mut theta, ITERATIONS) {
         Ok(theta) => {
-            print!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations: {:?}", alpha, ITERATIONS, &theta[1..]);
+            println!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations: {:?}", alpha, ITERATIONS, &theta[1..]);
         }
         Err(e) => panic!("{}", e.get_ref().unwrap()),
     }
     let duration = start.elapsed();
-    println!("Time elapsed in get_thetas() is: {:?}", duration);
+    println!("Time elapsed in get_thetas() is: {:?}\n", duration);
+
+    let start = Instant::now();
+    match gradient_descent::get_thetas(&x, &y, alpha, &mut theta, ITERATIONS) {
+        Ok(theta) => {
+            println!("Hypothesis function");
+            println!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations: {:?}", alpha, ITERATIONS, &theta[1..]);
+        }
+        Err(e) => panic!("{}", e.get_ref().unwrap()),
+    }
+    let duration = start.elapsed();
+    println!("Time elapsed in get_thetas() is: {:?}\n", duration);
 
     // Read data from file
     let (flattened_x, num_feat, y) = match read_data::get_data_flat_x(input_file_path) {
@@ -58,6 +69,7 @@ pub fn sample_run(input_file_path: &Path) {
         ITERATIONS,
     ) {
         Ok(theta) => {
+            println!("Flattned X");
             println!(
                 "Gradient Descent with learning speed {} and {} number of iterations:\n {:?}",
                 alpha,
