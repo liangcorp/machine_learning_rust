@@ -36,7 +36,7 @@ pub fn sample_run(input_file_path: &Path) {
     println!("Time elapsed in get_thetas() is: {:?}\n", duration);
 
     let start = Instant::now();
-    match gradient_descent::get_thetas(&x, &y, alpha, &mut theta, ITERATIONS) {
+    match gradient_descent::get_thetas_hypothesis_function(&x, &y, alpha, &mut theta, ITERATIONS) {
         Ok(theta) => {
             println!("Hypothesis function");
             println!("Found thetas using Gradient Descent with learning speed {} and {} number of iterations: {:?}", alpha, ITERATIONS, &theta[1..]);
@@ -69,7 +69,7 @@ pub fn sample_run(input_file_path: &Path) {
         ITERATIONS,
     ) {
         Ok(theta) => {
-            println!("Flattned X");
+            println!("Flattened X");
             println!(
                 "Gradient Descent with learning speed {} and {} number of iterations:\n {:?}",
                 alpha,

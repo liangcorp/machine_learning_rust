@@ -6,7 +6,7 @@
 use std::io;
 use std::io::{Error, ErrorKind};
 
-/// # Linear Regressin Hypothsis
+/// # Linear Regression Hypothesis
 /// h(x) = theta_0 * x_0 + theta_1 * x_1
 fn linear_regression_hypothesis(
     x_mtrx: &[Vec<f32>],
@@ -104,7 +104,7 @@ pub fn get_thetas(
 ///
 /// theta(indx,:) = theta(indx,:) -
 ///                 alpha * ((((temp[] * X[]) - y[]) * X(:,indx))/m);
-pub fn get_thetas_hypthesis_function(
+pub fn get_thetas_hypothesis_function(
     x_mtrx: &[Vec<f32>],
     y_vec: &[f32],
     alpha: f32,
