@@ -37,7 +37,6 @@ fn linear_regression_hypothesis(
 ///
 /// ## Implement the following matlab formula:
 ///
-///
 /// theta(indx,:) = theta(indx,:) -
 ///                 alpha * ((((temp[] * X[]) - y[]) * X(:,indx))/m);
 pub fn get_thetas(
