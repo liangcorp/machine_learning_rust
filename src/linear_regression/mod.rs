@@ -44,7 +44,7 @@ pub fn sample_run(input_file_path: &Path) {
         Err(e) => panic!("{}", e.get_ref().unwrap()),
     }
     let duration = start.elapsed();
-    println!("Time elapsed in get_thetas() is: {:?}\n", duration);
+    println!("Time elapsed in get_thetas_hypothesis_function() is: {:?}\n", duration);
 
     // Read data from file
     let (flattened_x, num_feat, y) = match read_data::get_data_flat_x(input_file_path) {

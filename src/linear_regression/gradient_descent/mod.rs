@@ -56,7 +56,7 @@ pub fn get_thetas(
         return Err(Error::new(ErrorKind::Other, "Mis-matching training sets"));
     }
 
-    // Convert Vec<Vec<f32>> to &[&[f32]]
+    // Convert &[Vec<f32>] to &[&[f32]]
     // to speeds up the execution by a little
     let mut x_vec_slice: Vec<&[f32]> = Vec::with_capacity(num_train);
 
