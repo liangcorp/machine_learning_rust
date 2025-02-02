@@ -1,3 +1,6 @@
 [submodule "logistic_regression_rust"]
 	path = logistic_regression_rust
-	url = ./logistic_regression_rust/
+	url = git@github.com:liangcorp/logistic_regression_rust.git
+[submodule "linear_regression_rust"]
+	path = linear_regression_rust
+	url = git@github.com:liangcorp/linear_regression_rust.git
