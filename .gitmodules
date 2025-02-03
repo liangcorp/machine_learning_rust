@@ -5,5 +5,5 @@
 	path = linear_regression_rust
 	url = git@github.com:liangcorp/linear_regression_rust.git
 [submodule "feature_scaling"]
-	path = feature_scaling
-	url = git@github.com:liangcorp/feature_scaling.git
+	path = feature_scaling_rust
+	url = git@github.com:liangcorp/feature_scaling_rust.git
