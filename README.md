@@ -3,5 +3,5 @@
 Implementation of various machine learning concepts in Rust
 
 - Linear Regression
-- Logistic Regression @TODO
+- Logistic Regression
 - Neural Network @TODO
